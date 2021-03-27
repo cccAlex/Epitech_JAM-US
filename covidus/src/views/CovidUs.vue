@@ -57,7 +57,6 @@ export default {
         }
     },
     mounted() {
-        console.log(this.$store.getters.getLang)
         this.lang = this.$store.getters.getLang
     }
 }
