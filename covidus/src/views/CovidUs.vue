@@ -2,7 +2,7 @@
     <div>
         <v-toolbar class="orange">
           <v-toolbar-title class="mx-0" v-text="title"></v-toolbar-title>
-          <a href="/"><h3 class="white--text">CovidUS</h3></a>
+          <h3 class="white--text" @click.prevent="$router.push('/')">CovidUS</h3>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn v-if="lang == 'Français'" flat class="yellow lighten-3" href="/donate">Don</v-btn>

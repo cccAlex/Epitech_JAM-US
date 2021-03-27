@@ -4,16 +4,40 @@
             <v-layout class="align-center justify-center">
                 <v-flex class="text-xs-center">
                     <v-card flat line v-if="error">
-                        <v-alert
+                        <v-alert v-if="lang == 'Français'"
+                          :value="error" color="red" dark dense border="top" icon="mdi-alert-circle" transition="scale-transition">
+                         Erreur avec les informations d'identification
+                        </v-alert>
+                        <v-alert v-if="lang == 'English'"
                           :value="error" color="red" dark dense border="top" icon="mdi-alert-circle" transition="scale-transition">
                          Error with the credentials
                         </v-alert>
+                        <v-alert v-if="lang == 'Español'"
+                          :value="error" color="red" dark dense border="top" icon="mdi-alert-circle" transition="scale-transition">
+                         Error con las credenciales
+                        </v-alert>
+                        <v-alert v-if="lang == 'русский'"
+                          :value="error" color="red" dark dense border="top" icon="mdi-alert-circle" transition="scale-transition">
+                         Ошибка с учетными данными
+                        </v-alert>
                     </v-card>
                     <v-card flat line class="text-center" v-if="success">
-                        <v-alert :value="success" color="green" dark dense border="top" icon="mdi-alert-circle" transition="scale-transition">
+                        <v-alert v-if="lang == 'Français'" :value="success" color="green" dark dense border="top" icon="mdi-alert-circle" transition="scale-transition">
+                        Authentification réussie
+                        </v-alert>
+                        <i v-if="lang == 'Français'">Vous allez être redirigé dans 5 secondes ...</i><br><br>
+                        <v-alert v-if="lang == 'English'" :value="success" color="green" dark dense border="top" icon="mdi-alert-circle" transition="scale-transition">
                         Authentification successful
                         </v-alert>
-                        <i>Redirecting you in 5 seconds ...</i><br><br>
+                        <i v-if="lang == 'English'">Redirecting you in 5 seconds ...</i>
+                        <v-alert v-if="lang == 'Español'" :value="success" color="green" dark dense border="top" icon="mdi-alert-circle" transition="scale-transition">
+                        Autentificación exitosa
+                        </v-alert>
+                        <i v-if="lang == 'Español'">Redirigiéndote en 5 segundos ...</i>
+                        <v-alert v-if="lang == 'русский'" :value="success" color="green" dark dense border="top" icon="mdi-alert-circle" transition="scale-transition">
+                        Аутентификация прошла успешно
+                        </v-alert>
+                        <i v-if="lang == 'русский'">Перенаправляем вас за 5 секунд ...</i>
                         <v-progress-circular indeterminate color="red"></v-progress-circular>
                     </v-card>
                 </v-flex>
@@ -54,12 +78,18 @@
               <v-row no-gutters style="height: 100px;" >
                 <v-col class="text-center">
                   <v-card class="pa-2" flat tile>
-                      <h4>NEED APPROVAL</h4>
+                      <h4 v-if="lang == 'Français'">BESOIN D'ÊTRE APPROUVÉ</h4>
+                      <h4 v-if="lang == 'English'">NEED APPROVAL</h4>
+                      <h4 v-if="lang == 'Español'" >NECESITA SER APROBADA</h4>
+                      <h4 v-if="lang == 'русский'">НЕОБХОДИМО УТВЕРЖДЕНИЕ</h4>
                   </v-card>
                 </v-col>
                 <v-col class="text-center">
                   <v-card class="pa-2" flat tile>
-                    <h4>EXISTING OFFERS</h4>
+                    <h4 v-if="lang == 'Français'">DONATION ACTUELLES</h4>
+                    <h4 v-if="lang == 'English'">CURRENT DONATIONS</h4>
+                    <h4 v-if="lang == 'Español'" >DONACIONES ACTUALES</h4>
+                    <h4 v-if="lang == 'русский'">ТЕКУЩИЕ ПОЖЕРТВОВАНИЯ</h4>
                   </v-card>
                 </v-col>
               </v-row>
