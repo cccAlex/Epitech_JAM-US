@@ -141,7 +141,7 @@ export default {
                 .then(({data}) => {
                     if (data.status) {
                         if (this.lang == "Français") {
-                            this.successMSG = "Merci pour vos soumissions, nous les examinerons et si tout va bien, votre soumission sera publiée!";
+                            this.successMSG = "Merci pour votre submission, nous l'examinerons et si tout va bien, votre donation sera publiée!";
                         } if (this.lang == "English") {
                             this.successMSG = "Thank you for your submissions, we will review it and if everything is ok your submission will be posted!";
                         } if (this.lang == "Español") {

@@ -160,10 +160,72 @@
       </section>
 
 
+
+      <section>
+        <v-container grid-list-md>
+          <v-layout row wrap>
+          <v-flex xs12 text-center class="mt-5">
+           <div v-if="lang == 'Français'" class="headline text-center">Formulaire de contact</div>
+           <div v-if="lang == 'English'" class="headline text-center">Contact form</div>
+           <div v-if="lang == 'Español'" class="headline text-center">Formulario de contacto</div>
+           <div v-if="lang == 'русский'" class="headline text-center">Форма обратной связи</div>
+           <br>
+          <div v-if="lang == 'Français'" class="text-center">Si vous souhaitez retirer une offre ou pour toute autre question, remplissez le formulaire ci-dessous!</div>
+          <div v-if="lang == 'English'" class="text-center">If you wish to remove an offer of have any other question fill out the form bellow!</div>
+          <div v-if="lang == 'Español'" class="text-center">Si desea eliminar una oferta o tiene alguna otra pregunta, complete el formulario a continuación.</div>
+          <div v-if="lang == 'русский'" class="text-center">Если вы хотите удалить предложение или задать другой вопрос, заполните форму ниже!</div>
+          </v-flex>
+          <v-flex xs8 offset-xs2>
+              <v-card class="elevation-0 transparent">
+                <v-card-text>
+                  <v-flex xs12>
+                    <v-alert :value="error" color="red" dark dense border="top" icon="mdi-alert-circle" transition="scale-transition">{{errorMSG}}</v-alert>
+                    <v-alert :value="success" color="green" dark dense border="top" icon="mdi-alert-circle" transition="scale-transition">{{successMSG}}</v-alert>
+                  </v-flex>
+                  <v-flex xs12>
+                    <v-text-field color="orange" v-if="lang == 'Français'" box label="Adresse e-mail" v-model="email" hint="Entrer votre Email!" persistent-hint></v-text-field>
+                    <v-text-field color="orange" v-if="lang == 'English'" box label="Email address" v-model="email" hint="Enter your email!" persistent-hint></v-text-field>
+                    <v-text-field color="orange" v-if="lang == 'Español'" box label="Dirección de correo electrónico" v-model="email" hint="¡Introduce tu correo electrónico!" persistent-hint></v-text-field>
+                    <v-text-field color="orange" v-if="lang == 'русский'" box label="Адрес электронной почты" v-model="email" hint="Введите адрес электронной почты!" persistent-hint></v-text-field>
+                  </v-flex>
+                  <br>
+                  <v-flex xs12>
+                    <v-select color="yellow" v-if="lang == 'Français'" :items="itemsFR" label="Catégorie" v-model="category" hint="Pour quoi nous contactez-vous?" persistent-hint dense></v-select>
+                    <v-select color="yellow" v-if="lang == 'English'" :items="itemsEN" label="Category" v-model="category" hint="What are you contacting us for?" persistent-hint dense></v-select>
+                    <v-select color="yellow" v-if="lang == 'Español'" :items="itemsES" label="Categoría" v-model="category" hint="¿Para qué nos contactas?" persistent-hint dense></v-select>
+                    <v-select color="yellow" v-if="lang == 'русский'" :items="itemsRU" label="Категория" v-model="category" hint="Для чего вы обращаетесь к нам?" persistent-hint dense></v-select>
+                  </v-flex>
+                  <br>
+                  <v-flex xs12>
+                    <v-textarea color="orange" v-model="message" v-if="lang == 'Français'" box multi-line label="Message" hint="Entrez votre message"></v-textarea>
+                    <v-textarea color="orange" v-model="message" v-if="lang == 'English'" box multi-line label="Message" hint="Enter your message"></v-textarea>
+                    <v-textarea color="orange" v-model="message" v-if="lang == 'Español'" box multi-line label="Mensaje" hint="Ingrese su mensaje"></v-textarea>
+                    <v-textarea color="orange" v-model="message" v-if="lang == 'русский'" box multi-line label="Сообщение" hint="Введите сообщение"></v-textarea>
+                  </v-flex>
+                  <v-flex xs12 class="text-center">
+                    <i color="orange" v-if="lang == 'Français'">Nous vous recontacterons par email</i>
+                    <i color="orange" v-if="lang == 'English'">We will contact you by email</i>
+                    <i color="orange" v-if="lang == 'Español'">Nos pondremos en contacto con usted por correo electrónico.</i>
+                    <i color="orange" v-if="lang == 'русский'">Мы свяжемся с вами по электронной почте</i>
+                  </v-flex>
+                  <br>
+                  <v-flex xs12 class="text-center">
+                    <v-btn @click.prevent="saveTicket()" v-if="lang == 'Français'" class="orange lighten-2 mb-5" dark large>Entrer en contact</v-btn>
+                    <v-btn @click.prevent="saveTicket()" v-if="lang == 'English'" class="orange lighten-2 mb-5" dark large>Get in touch</v-btn>
+                    <v-btn @click.prevent="saveTicket()" v-if="lang == 'Español'" class="orange lighten-2 mb-5" dark large>Ponerse en contacto</v-btn>
+                    <v-btn @click.prevent="saveTicket()" v-if="lang == 'русский'" class="orange lighten-2 mb-5" dark large>Связаться</v-btn>
+                  </v-flex>
+                </v-card-text>
+             </v-card>
+          </v-flex>
+          </v-layout>
+        </v-container>
+      </section>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
   name: 'Home',
@@ -171,7 +233,18 @@ export default {
     return {
       lang: '',
       defaultlang: '',
-      languages: ['Français', 'English', 'Español', 'русский']
+      email: '',
+      category: '',
+      message: '',
+      languages: ['Français', 'English', 'Español', 'русский'],
+      itemsEN: ['Remove an offer', 'Bug on the website', 'Other'],
+      itemsFR: ['Supprimer une donation', 'Bug sur le site', 'Autre'],
+      itemsRU: ['Удалить предложение', 'Ошибка на сайте', 'Другой'],
+      itemsES: ['Quitar una oferta', 'Error en el sitio web', 'Otra'],
+      error: false,
+      errorMSG: '',
+      success: false,
+      successMSG: '',
     }
   },
   watch: {
@@ -184,6 +257,57 @@ export default {
   mounted() {
     this.defaultlang = this.$store.getters.getLang
     this.lang = this.$store.getters.getLang
+  },
+  methods: {
+    saveTicket() {
+      if (!this.email || !this.category || !this.message) {
+        if (this.lang == "Français") {
+            this.errorMSG = "Vous devez tout remplir dans le formulaire";
+        } if (this.lang == "English") {
+            this.errorMSG = "You have to fill everything in the form";
+        } if (this.lang == "Español") {
+            this.errorMSG = "Tienes que completar todo en el formulario";
+        } if (this.lang == "русский") {
+            this.errorMSG = "Вы должны заполнить все в форме";
+        }
+        this.error = true;
+        setTimeout(() => {
+          this.error = false
+        }, 3000);
+      } else {
+        axios.post('http://localhost:6969/api/saveTicket', {
+          email: this.email,
+          category: this.category,
+          message: this.message
+        })
+        .then(({data}) => {
+          if (data.status) {
+            if (this.lang == "Français") {
+              this.successMSG = "Merci pour votre soumission, nous vous recontacterons!";
+            } if (this.lang == "English") {
+              this.successMSG = "Thank you for your submission, we will contact you!";
+            } if (this.lang == "Español") {
+              this.successMSG = "GGracias por su envío, ¡nos comunicaremos con usted!";
+            } if (this.lang == "русский") {
+              this.successMSG = "Спасибо за заявку, мы свяжемся с вами!";
+            }
+            this.success = true;
+            this.email = '';
+            this.category = '';
+            this.message = '';
+            setTimeout(() => {
+                this.success = false;
+            }, 5000);
+          } else {
+            this.error = true;
+            this.errorMSG = 'db error'
+            setTimeout(() => {
+              this.error = false
+            }, 3000);
+          }
+        })
+      }
+    }
   }
 }
 </script>

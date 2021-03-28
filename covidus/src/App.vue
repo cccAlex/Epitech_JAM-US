@@ -26,7 +26,9 @@ export default {
       lang: '',
       links: ['https://www.youtube.com/watch?v=QH2-TGUlwu4',
               'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-              'https://www.youtube.com/watch?v=MGRm4IzK1SQ']
+              'https://www.youtube.com/watch?v=MGRm4IzK1SQ',
+              'https://www.youtube.com/watch?v=V0XOApF5nLU',
+              'https://www.youtube.com/watch?v=dfXRud1AIiw']
     }
   },
   mounted() {
@@ -34,7 +36,7 @@ export default {
   },
   methods: {
     randomlink() {
-      window.open(this.links[Math.floor((Math.random() * 3))], 'ad', "height=720,width=1280")
+      window.open(this.links[Math.floor((Math.random() * 5))], 'ad', "height=720,width=1280")
     }
   }
 };

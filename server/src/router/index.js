@@ -10,11 +10,19 @@ const deleteMaterial = require('../routes/deleteMaterial');
 router.get('/getMaterials', getMaterials);
 router.get('/getApprovedMaterials', getApprovedMaterials);
 router.post('/saveMaterials', saveMaterials);
-router.post('/approveMaterial', approveMaterial)
-router.post('/deleteMaterial', deleteMaterial)
+router.post('/approveMaterial', approveMaterial);
+router.post('/deleteMaterial', deleteMaterial);
 
 const Login = require('../routes/Login');
 
 router.post('/login', Login);
+
+const saveTicket = require('../routes/saveTicket');
+const getTicket = require('../routes/getTicket');
+const deleteTicket = require('../routes/deleteTicket');
+
+router.post('/saveTicket', saveTicket);
+router.get('/getTicket', getTicket);
+router.post('/deleteTicket', deleteTicket);
 
 module.exports = router;

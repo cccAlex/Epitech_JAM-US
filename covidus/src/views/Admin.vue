@@ -38,6 +38,7 @@
                         Аутентификация прошла успешно
                         </v-alert>
                         <i v-if="lang == 'русский'">Перенаправляем вас за 5 секунд ...</i>
+                        <br><br>
                         <v-progress-circular indeterminate color="red"></v-progress-circular>
                     </v-card>
                 </v-flex>
@@ -74,6 +75,106 @@
         </v-container>
 
         <section v-if="logged_in && !success">
+          <v-container fluid>
+            <v-data-table v-if="lang == 'English'" :headers="headersEN" :items="data" item-key="category" show-expand class="elevation-1" :search="search">
+              <template v-slot:top>
+                <v-toolbar flat>
+                  <v-toolbar-title>Tickets</v-toolbar-title>
+                  <v-card-title>
+                      <v-text-field
+                        v-model="search"
+                        append-icon="mdi-magnify"
+                        label="Search"
+                        single-line
+                        hide-details
+                      ></v-text-field>
+                    </v-card-title>
+                </v-toolbar>
+              </template>
+              <template v-slot:expanded-item="{ headers, item }">
+                <td :colspan="headers.length">
+                  {{ item.message }}
+                <br>
+                <v-icon color="orange" @click.prevent="deleteTicket(item._id)"
+                  >mdi-trash-can-outline</v-icon>
+                </td>
+              </template>
+            </v-data-table>
+            <v-data-table v-if="lang == 'Français'" :headers="headersFR" :items="data" item-key="category" show-expand class="elevation-1" :search="search">
+              <template v-slot:top>
+                <v-toolbar flat>
+                  <v-toolbar-title>Tickets</v-toolbar-title>
+                  <v-card-title>
+                      <v-text-field
+                        v-model="search"
+                        append-icon="mdi-magnify"
+                        label="Rechercher"
+                        single-line
+                        hide-details
+                      ></v-text-field>
+                    </v-card-title>
+                </v-toolbar>
+              </template>
+              <template v-slot:expanded-item="{ headers, item }">
+                <td :colspan="headers.length">
+                  {{ item.message }}
+                <br>
+                <v-icon color="orange" @click.prevent="deleteTicket(item._id)"
+                  >mdi-trash-can-outline</v-icon>
+                </td>
+              </template>
+            </v-data-table>
+            <v-data-table v-if="lang == 'Español'" :headers="headersES" :items="data" item-key="category" show-expand class="elevation-1" :search="search">
+              <template v-slot:top>
+                <v-toolbar flat>
+                  <v-toolbar-title>Entradas</v-toolbar-title>
+                  <v-card-title>
+                      <v-text-field
+                        v-model="search"
+                        append-icon="mdi-magnify"
+                        label="Buscar"
+                        single-line
+                        hide-details
+                      ></v-text-field>
+                    </v-card-title>
+                </v-toolbar>
+              </template>
+              <template v-slot:expanded-item="{ headers, item }">
+                <td :colspan="headers.length">
+                  {{ item.message }}
+                <br>
+                <v-icon color="orange" @click.prevent="deleteTicket(item._id)"
+                  >mdi-trash-can-outline</v-icon>
+                </td>
+              </template>
+            </v-data-table>
+            <v-data-table v-if="lang == 'русский'" :headers="headersRU" :items="data" item-key="category" show-expand class="elevation-1" :search="search">
+              <template v-slot:top>
+                <v-toolbar flat>
+                  <v-toolbar-title>Билеты</v-toolbar-title>
+                  <v-card-title>
+                      <v-text-field
+                        v-model="search"
+                        append-icon="mdi-magnify"
+                        label="поиск"
+                        single-line
+                        hide-details
+                      ></v-text-field>
+                    </v-card-title>
+                </v-toolbar>
+              </template>
+              <template v-slot:expanded-item="{ headers, item }">
+                <td :colspan="headers.length">
+                  {{ item.message }}
+                <br>
+                <v-icon color="orange" @click.prevent="deleteTicket(item._id)"
+                  >mdi-trash-can-outline</v-icon>
+                </td>
+              </template>
+            </v-data-table>
+            </v-container>
+
+
             <v-container fluid>
               <v-row no-gutters style="height: 100px;" >
                 <v-col class="text-center">
@@ -175,16 +276,74 @@ export default {
             success: false,
             tbaData: [],
             approvedData: [],
+            search: '',
+            data: [],
+            headersEN: [
+              {
+                text: 'Category',
+                align: 'start',
+                sortable: true,
+                value: 'category',
+              },
+              { text: 'Email', value: 'email' },
+              { text: 'Posted on', value: 'posted' },
+              { text: '', value: 'data-table-expand' },
+            ],
+            headersFR: [
+              {
+                text: 'Location',
+                align: 'start',
+                sortable: true,
+                value: 'category',
+              },
+              { text: 'Email', value: 'email' },
+              { text: 'Posté le', value: 'posted' },
+              { text: '', value: 'data-table-expand' },
+            ],
+            headersRU: [
+              {
+                text: 'Категория',
+                align: 'start',
+                sortable: true,
+                value: 'category',
+              },
+              { text: 'электронное письмо', value: 'email' },
+              { text: 'опубликовано', value: 'posted' },
+              { text: '', value: 'data-table-expand' },
+            ],
+            headersES: [
+              {
+                text: 'Categoría',
+                align: 'start',
+                sortable: true,
+                value: 'category',
+              },
+              { text: 'Email', value: 'email' },
+              { text: 'Publicado en', value: 'posted' },
+              { text: '', value: 'data-table-expand' },
+            ],
         }
     },
     mounted() {
         this.lang = this.$store.getters.getLang
+        axios.get('http://localhost:6969/api/getTicket')
+        .then(({data :{data}}) => {
+          console.log(data)
+          this.data = data
+        })
     },
     methods: {
         getTbaMaterial() {
             axios.get('http://localhost:6969/api/getMaterials')
             .then(({data : {data}}) => {
                 this.tbaData = data;
+            })
+            .catch((err) => console.warn(err))
+        },
+        getTicket() {
+            axios.get('http://localhost:6969/api/getTicket')
+            .then(({data : {data}}) => {
+                this.data = data;
             })
             .catch((err) => console.warn(err))
         },
@@ -238,6 +397,17 @@ export default {
                 if (data.status) {
                     this.getTbaMaterial()
                     this.getApprovedMaterial()
+                }
+            })
+            .catch((err) => console.warn(err))
+        },
+        deleteTicket(id) {
+          axios.post('http://localhost:6969/api/deleteTicket', {
+                id: id
+            })
+            .then(({data}) => {
+                if (data.status) {
+                    this.getTicket()
                 }
             })
             .catch((err) => console.warn(err))
