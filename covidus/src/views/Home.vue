@@ -94,7 +94,7 @@
 
     <section>
       <br /><br />
-      <v-parallax src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/css-gradient.png" height="200" width="100%">
+      <v-parallax src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/css-gradient.png" height="150" width="100%">
         <v-layout column align-center justify-center class="white--text">
           <h1 v-if="lang == 'Français'" class="white--text mb-2 display-1 text-xs-center" style="font-weight: 900; text-shadow: 3px 2px #000000">Comment ça marche?</h1>
           <h1 v-if="lang == 'English'" class="white--text mb-2 display-1 text-xs-center" style="font-weight: 900; text-shadow: 3px 2px #000000">How does it work?</h1>
@@ -148,19 +148,42 @@
     </section>
 
     <section>
+      <br /><br />
+      <v-parallax src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/css-gradient.png" height="150" width="100%">
+        <v-layout column align-center justify-center class="white--text">
+          <h1 v-if="lang == 'Français'" class="white--text mb-2 display-1 text-xs-center" style="font-weight: 900; text-shadow: 3px 2px #000000">Charité</h1>
+          <h1 v-if="lang == 'English'" class="white--text mb-2 display-1 text-xs-center" style="font-weight: 900; text-shadow: 3px 2px #000000">Charity</h1>
+          <h1 v-if="lang == 'Español'" class="white--text mb-2 display-1 text-xs-center" style="font-weight: 900; text-shadow: 3px 2px #000000">Caridad</h1>
+          <h1 v-if="lang == 'русский'" class="white--text mb-2 display-1 text-xs-center" style="font-weight: 900; text-shadow: 3px 2px #000000">Благотворительность</h1>
+          <div v-if="lang == 'Français'" class="white--text subheading mb-3 text-xs-center" style="font-weight: 900; text-shadow: 2px 2px #000000">Vous pouvez également soutenir les personnes dans le besoin en faisant un don au Fonds de Réponse de Solidarité COVID-19.</div>
+          <div v-if="lang == 'English'" class="white--text subheading mb-3 text-xs-center" style="font-weight: 900; text-shadow: 2px 2px #000000">You can also support people in need by making a donation to the COVID-19 Solidarity Response Fund.</div>
+          <div v-if="lang == 'Español'" class="white--text subheading mb-3 text-xs-center" style="font-weight: 900; text-shadow: 2px 2px #000000">Вы также можете поддержать нуждающихся, сделав пожертвование в Фонд солидарности по борьбе с COVID-19.</div>
+          <div v-if="lang == 'русский'" class="white--text subheading mb-3 text-xs-center" style="font-weight: 900; text-shadow: 2px 2px #000000">Что можно делать с covidUS</div>
+        </v-layout>
+      </v-parallax>
+    </section>
+    <br />
+    <v-layout align-center>
+        <v-img src="@/assets/charity.png" @click.prevent="charity()"></v-img>
+    </v-layout>
+    <section>
+      <br /><br />
+      <v-parallax src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/css-gradient.png" height="150" width="100%">
+        <v-layout column align-center justify-center class="white--text">
+          <h1 v-if="lang == 'Français'" class="white--text mb-2 display-1 text-xs-center" style="font-weight: 900; text-shadow: 3px 2px #000000">Formulaire de contact</h1>
+          <h1 v-if="lang == 'English'" class="white--text mb-2 display-1 text-xs-center" style="font-weight: 900; text-shadow: 3px 2px #000000">Contact form</h1>
+          <h1 v-if="lang == 'Español'" class="white--text mb-2 display-1 text-xs-center" style="font-weight: 900; text-shadow: 3px 2px #000000">Formulario de contacto</h1>
+          <h1 v-if="lang == 'русский'" class="white--text mb-2 display-1 text-xs-center" style="font-weight: 900; text-shadow: 3px 2px #000000">Форма обратной связи</h1>
+          <div v-if="lang == 'Français'" class="white--text subheading mb-3 text-xs-center" style="font-weight: 900; text-shadow: 2px 2px #000000">Si vous souhaitez retirer une offre ou pour toute autre question, remplissez le formulaire ci-dessous!</div>
+          <div v-if="lang == 'English'" class="white--text subheading mb-3 text-xs-center" style="font-weight: 900; text-shadow: 2px 2px #000000">If you wish to remove an offer of have any other question fill out the form bellow!</div>
+          <div v-if="lang == 'Español'" class="white--text subheading mb-3 text-xs-center" style="font-weight: 900; text-shadow: 2px 2px #000000">Si desea eliminar una oferta o tiene alguna otra pregunta, complete el formulario a continuación.</div>
+          <div v-if="lang == 'русский'" class="white--text subheading mb-3 text-xs-center" style="font-weight: 900; text-shadow: 2px 2px #000000">Если вы хотите удалить предложение или задать другой вопрос, заполните форму ниже!</div>
+        </v-layout>
+      </v-parallax>
+    </section>
+    <section>
       <v-container grid-list-md>
         <v-layout row wrap>
-          <v-flex xs12 text-center class="mt-5">
-            <div v-if="lang == 'Français'" class="headline text-center">Formulaire de contact</div>
-            <div v-if="lang == 'English'" class="headline text-center">Contact form</div>
-            <div v-if="lang == 'Español'" class="headline text-center">Formulario de contacto</div>
-            <div v-if="lang == 'русский'" class="headline text-center">Форма обратной связи</div>
-            <br />
-            <div v-if="lang == 'Français'" class="text-center">Si vous souhaitez retirer une offre ou pour toute autre question, remplissez le formulaire ci-dessous!</div>
-            <div v-if="lang == 'English'" class="text-center">If you wish to remove an offer of have any other question fill out the form bellow!</div>
-            <div v-if="lang == 'Español'" class="text-center">Si desea eliminar una oferta o tiene alguna otra pregunta, complete el formulario a continuación.</div>
-            <div v-if="lang == 'русский'" class="text-center">Если вы хотите удалить предложение или задать другой вопрос, заполните форму ниже!</div>
-          </v-flex>
           <v-flex xs8 offset-xs2>
             <v-card class="elevation-0 transparent">
               <v-card-text>
@@ -301,6 +324,16 @@ export default {
           });
       }
     },
+    charity() {
+      if (this.lang == "Français")
+        window.open('https://covid19responsefund.org/fr/', '_blank')
+      if (this.lang == "English")
+        window.open('https://covid19responsefund.org/en/', '_blank')
+      if (this.lang == "Español")
+        window.open('https://covid19responsefund.org/es/', '_blank')
+      if (this.lang == "русский")
+        window.open('https://covid19responsefund.org/en/', '_blank')
+    }
   },
 };
 </script>

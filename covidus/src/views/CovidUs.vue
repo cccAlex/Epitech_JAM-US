@@ -1,10 +1,14 @@
 <template>
   <div>
-    <v-toolbar class="orange">
-      <v-toolbar-title class="mx-0" v-text="title"></v-toolbar-title>
+    <v-app-bar class="orange" fixed>
+      <v-app-bar-title class="mx-0" v-text="title"></v-app-bar-title>
       <h3 class="white--text" @click.prevent="$router.push('/')">CovidUS</h3>
       <v-spacer></v-spacer>
-      <v-toolbar-items>
+      <v-app-bar-items>
+        <v-btn v-if="lang == 'Français'" flat class="orange lighten-3" href="https://www.who.int/fr/emergencies/diseases/novel-coronavirus-2019/advice-for-public" target="_blank">Règles de sécurité COVID-19</v-btn>
+        <v-btn v-if="lang == 'English'" flat class="orange lighten-3" href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public" target="_blank">COVID-19 safety rules</v-btn>
+        <v-btn v-if="lang == 'Español'" flat class="orange lighten-3" href="https://www.who.int/es/emergencies/diseases/novel-coronavirus-2019/advice-for-public" target="_blank">Reglas de seguridad COVID-19</v-btn>
+        <v-btn v-if="lang == 'русский'" flat class="orange lighten-3" href="https://www.who.int/ru/emergencies/diseases/novel-coronavirus-2019/advice-for-public" target="_blank">Правила безопасности при COVID-19</v-btn>
         <v-btn v-if="lang == 'Français'" flat class="yellow lighten-3" href="/donate">Don</v-btn>
         <v-btn v-if="lang == 'English'" flat class="yellow lighten-3" href="/donate">Donate</v-btn>
         <v-btn v-if="lang == 'Español'" flat class="yellow lighten-3" href="/donate">Dar</v-btn>
@@ -13,9 +17,9 @@
         <v-btn v-if="lang == 'English'" flat class="orange lighten-3" href="/receive">Receive</v-btn>
         <v-btn v-if="lang == 'Español'" flat class="orange lighten-3" href="/receive">Recibir</v-btn>
         <v-btn v-if="lang == 'русский'" flat class="orange lighten-3" href="/receive">Получить</v-btn>
-      </v-toolbar-items>
-    </v-toolbar>
-    <section>
+      </v-app-bar-items>
+    </v-app-bar>
+    <section class="mt-16">
       <v-card class="d-flex justify-center" flat tile>
         <v-card class="text-center mt-16" flat tile>
           <v-img src="@/assets/give_mask.png" max-width="300" max-height="300" class="mr-16"></v-img>
@@ -138,7 +142,7 @@ export default {
           title: "Gloves",
           color: "orange",
           icon: "mdi-boxing-glove",
-          text: "Medical gloves  are used by health care personnel to prevent the spread of infection or illness. Medical gloves are disposable and include patient examination gloves and surgeon’s gloves.",
+          text: "Gloves protect your hands when coming in contact with surfaces that might be contaminated.",
         },
         {
           title: "Safety glasses",
@@ -170,7 +174,7 @@ export default {
           title: "Gants",
           color: "orange",
           icon: "mdi-boxing-glove",
-          text: "Les gants médicaux sont utilisés par le personnel de santé pour empêcher la propagation d une infection ou d une maladie. Les gants médicaux sont jetables et comprennent des gants d examen du patient et des gants de chirurgien.",
+          text: "Les gants protègent vos mains lorsqu'ils entrent en contact avec des surfaces susceptibles d'être contaminées.",
         },
         {
           title: "Lunettes de protection",
@@ -202,7 +206,7 @@ export default {
           title: "Guantes",
           color: "orange",
           icon: "mdi-boxing-glove",
-          text: "El personal sanitario utiliza guantes médicos para prevenir la propagación de infecciones o enfermedades. Los guantes médicos son desechables e incluyen guantes de examen de pacientes y guantes de cirujano.",
+          text: "Los guantes protegen sus manos cuando entran en contacto con superficies que puedan estar contaminadas.",
         },
         {
           title: "Lentes de seguridad",
@@ -234,7 +238,7 @@ export default {
           title: "Перчатки",
           color: "orange",
           icon: "mdi-boxing-glove",
-          text: "Медицинские перчатки используются медицинским персоналом для предотвращения распространения инфекции или болезни. Медицинские перчатки являются одноразовыми и включают перчатки для осмотра пациентов и перчатки для хирургов.",
+          text: "Перчатки защищают руки при контакте с поверхностями, которые могут быть загрязнены.",
         },
         {
           title: "Защитные очки",

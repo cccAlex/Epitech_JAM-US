@@ -1,10 +1,14 @@
 <template>
   <div>
-    <v-toolbar class="orange">
-      <v-toolbar-title class="mx-0" v-text="title"></v-toolbar-title>
+    <v-app-bar class="orange" fixed>
+      <v-app-bar-title class="mx-0" v-text="title"></v-app-bar-title>
       <h3 class="white--text" @click.prevent="$router.push('/')">CovidUS</h3>
       <v-spacer></v-spacer>
-      <v-toolbar-items>
+      <v-app-bar-items>
+        <v-btn v-if="lang == 'Français'" flat class="orange lighten-3" href="https://www.who.int/fr/emergencies/diseases/novel-coronavirus-2019/advice-for-public" target="_blank">Consignes de sécurité COVID-19</v-btn>
+        <v-btn v-if="lang == 'English'" flat class="orange lighten-3" href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public" target="_blank">COVID-19 safety guidelines</v-btn>
+        <v-btn v-if="lang == 'Español'" flat class="orange lighten-3" href="https://www.who.int/es/emergencies/diseases/novel-coronavirus-2019/advice-for-public" target="_blank">Pautas de seguridad COVID-19</v-btn>
+        <v-btn v-if="lang == 'русский'" flat class="orange lighten-3" href="https://www.who.int/ru/emergencies/diseases/novel-coronavirus-2019/advice-for-public" target="_blank">Рекомендации по безопасности COVID-19</v-btn>
         <v-btn v-if="lang == 'Français'" flat class="yellow lighten-3" href="/donate">Don</v-btn>
         <v-btn v-if="lang == 'English'" flat class="yellow lighten-3" href="/donate">Donate</v-btn>
         <v-btn v-if="lang == 'Español'" flat class="yellow lighten-3" href="/donate">Dar</v-btn>
@@ -13,8 +17,8 @@
         <v-btn v-if="lang == 'English'" flat class="orange lighten-3" href="/receive">Receive</v-btn>
         <v-btn v-if="lang == 'Español'" flat class="orange lighten-3" href="/receive">Recibir</v-btn>
         <v-btn v-if="lang == 'русский'" flat class="orange lighten-3" href="/receive">Получить</v-btn>
-      </v-toolbar-items>
-    </v-toolbar>
+      </v-app-bar-items>
+    </v-app-bar>
 
     <v-container fluid>
       <v-data-table v-if="lang == 'English'" :headers="headersEN" :items="data" item-key="location" show-expand class="elevation-1" :search="search" :page.sync="page" :items-per-page="itemsPerPage" hide-default-footer @page-count="pageCount = $event">
