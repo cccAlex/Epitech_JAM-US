@@ -16,6 +16,7 @@ npm run serve
 MONGODB_URI=[your mongodb uri]
 ADMUSER=[admin username]
 PASSWORD=[admin password]
+```
 
 # Some pictures of the project
 
