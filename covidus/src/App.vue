@@ -7,7 +7,11 @@
     </v-main>
     <v-footer app padless dark>
       <v-col class="text-center" cols="12">
-        {{ new Date().getFullYear() }} — <strong>Covid US</strong>
+        {{ new Date().getFullYear() }} — <strong>Covid US</strong> —
+        <i v-if="lang == 'Français'">soutenez-nous en regardant une annonce <a @click="randomlink()">ici</a></i>
+        <i v-if="lang == 'English'">support us by watching an ad <a @click="randomlink()">here</a></i>
+        <i v-if="lang == 'Español'">apóyanos viendo un anuncio <a @click="randomlink()">aquí</a></i>
+        <i v-if="lang == 'русский'">поддержите нас, посмотрев рекламу <a @click="randomlink()">здесь</a></i>
       </v-col>
     </v-footer>
   </v-app>
@@ -17,5 +21,21 @@
 
 export default {
   name: 'App',
+  data() {
+    return {
+      lang: '',
+      links: ['https://www.youtube.com/watch?v=QH2-TGUlwu4',
+              'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+              'https://www.youtube.com/watch?v=MGRm4IzK1SQ']
+    }
+  },
+  mounted() {
+    this.lang = this.$store.getters.getLang
+  },
+  methods: {
+    randomlink() {
+      window.open(this.links[Math.floor((Math.random() * 3))], 'ad', "height=720,width=1280")
+    }
+  }
 };
 </script>
